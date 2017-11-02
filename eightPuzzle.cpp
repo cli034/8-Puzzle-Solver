@@ -151,6 +151,7 @@ public:
     }
     
     //evaluation function f(n) = g(n) + h(n) for misplaced tiles
+    //increment whenever theres a value not matching the goal state
     int getMisplacedTilesCost()
     {
         int misplacedCnt = 0;
@@ -173,7 +174,16 @@ public:
     }
     
     //evaluation function f(n) = g(n) + h(n) for manhattan distance
-    // distance = abs(xf-xi) + abs(yf-yi)
+    // distance = abs(x_f-x_i) + abs(y_f-y_i)
+    // finding the final position of the value suppose to be in
+    // for example 5, we know that it suppose to be in the 5th box of the 2d matrix
+    // from left to right
+    // formula x_f = (value - 1) / row
+    // formula y_f = (value - 1) % col
+    // value = 5, where it should be at box (1,1)
+    // x_f = (5 - 1) / 3 = 1, where row = 3 in this case
+    // y_f = (5 - 1) % 3 = 1, where col = 3 in this case
+    // so we achieved (1,1) for the proper location
     int getManhattanCost()
     {
         int distanceCnt = 0;
@@ -302,6 +312,7 @@ void selectionSortMD(vector<Puzzle> &v)
 }
 
 //queueing function for uniform cost search
+//does not matter the order it queues into since all the cost is the same
 queue<Puzzle> uniformCostSearch(queue<Puzzle>& n, Puzzle& curr, vector<Puzzle> &v, int &depth)
 {
     //first successor
@@ -348,6 +359,7 @@ queue<Puzzle> uniformCostSearch(queue<Puzzle>& n, Puzzle& curr, vector<Puzzle> &
 }
 
 //queueing function for misplaced tiles
+//always queue the state with lowest cost in front
 queue<Puzzle> misplacedTiles(queue<Puzzle>& n, Puzzle& curr, vector<Puzzle> &v, int &depth)
 {
     vector<Puzzle> toSort;
@@ -403,6 +415,7 @@ queue<Puzzle> misplacedTiles(queue<Puzzle>& n, Puzzle& curr, vector<Puzzle> &v, 
 }
 
 //queueing fucntion for manhattan distance
+//always queue the state with lowest cost in front
 queue<Puzzle> manhattanDistance(queue<Puzzle>& n, Puzzle& curr, vector<Puzzle> &v, int &depth)
 {
     vector<Puzzle> toSort;
@@ -457,7 +470,7 @@ queue<Puzzle> manhattanDistance(queue<Puzzle>& n, Puzzle& curr, vector<Puzzle> &
     return n;
 }
 
-
+// this is the A* algorithm
 void general_search(Puzzle init, const int& queueing_function)
 {
     //a list that stores nodes that have been generated but not yet visited
