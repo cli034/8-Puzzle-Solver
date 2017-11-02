@@ -6,7 +6,7 @@
 
 const int row = 3; //row size of puzzle
 const int col = 3; //column size of puzzle
-int defaultPuzzle[row][col] = {{0,1,2},{4,5,3},{7,8,6}}; // default puzzle
+int defaultPuzzle[row][col] = {{1,0,2},{7,5,4},{8,6,3}}; // default puzzle
 //int defaultPuzzle[row][col] = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{0,13,14,15}};
 int goal[row][col] = {{1,2,3},{4,5,6},{7,8,0}}; //goal state of puzzle
 //int goal[row][col] = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0}};
@@ -153,7 +153,6 @@ public:
     //evaluation function f(n) = g(n) + h(n) for misplaced tiles
     int getMisplacedTilesCost()
     {
-        
         int misplacedCnt = 0;
         
         for (int i = 0; i < row; ++i)
@@ -176,7 +175,6 @@ public:
     //evaluation function f(n) = g(n) + h(n) for manhattan distance
     int getManhattanCost()
     {
-        
         int distanceCnt = 0;
         int val = 0;
         int xFinal = 0;
@@ -189,7 +187,7 @@ public:
             for (int j = 0; j < col; ++j)
             {
                 val = puzzle[i][j];
-                
+                // no heuristic value for blank space
                 if (val != 0)
                 {
                     xFinal = (val - 1) / row;
