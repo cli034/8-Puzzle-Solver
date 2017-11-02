@@ -458,7 +458,7 @@ queue<Puzzle> manhattanDistance(queue<Puzzle>& n, Puzzle& curr, vector<Puzzle> &
 }
 
 
-int general_search(Puzzle init, const int& queueing_function)
+void general_search(Puzzle init, const int& queueing_function)
 {
     //a list that stores nodes that have been generated but not yet visited
     queue<Puzzle> node;
@@ -475,7 +475,7 @@ int general_search(Puzzle init, const int& queueing_function)
         if (node.empty())
         {
             cout << "Search failure!" << endl;
-            return -1;
+            return;
         }
         
         Puzzle current = node.front();
@@ -507,7 +507,7 @@ int general_search(Puzzle init, const int& queueing_function)
             cout << "To solve this problem the search algorithm expanded a total of " << visited.size() << " nodes." << endl;
             cout << "The maximum number of nodes in the queue at one time was " << maxNode << endl;
             cout << "The depth of goal node was " << current.getDepth() << endl;
-            return 1;
+            return;
         }
     
         if (queueing_function == 1)
@@ -598,6 +598,6 @@ int main()
     cout << endl;
     
     
-    cout << general_search(p,userNum) << endl;
+    general_search(p,userNum);
     return 0;
 }
