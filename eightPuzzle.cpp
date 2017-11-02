@@ -510,9 +510,6 @@ void general_search(Puzzle init, const int& queueing_function)
         current.drawPuzzle();
         cout << endl;
         
-        visited.push_back(node.front());
-        node.pop();
-        
         //if the current state is goal state
         if (current.isEqual(goal))
         {
@@ -522,6 +519,9 @@ void general_search(Puzzle init, const int& queueing_function)
             cout << "The depth of goal node was " << current.getDepth() << endl;
             return;
         }
+        
+        visited.push_back(node.front());
+        node.pop();
     
         if (queueing_function == 1)
         {
