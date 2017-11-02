@@ -173,14 +173,13 @@ public:
     }
     
     //evaluation function f(n) = g(n) + h(n) for manhattan distance
+    // distance = abs(xf-xi) + abs(yf-yi)
     int getManhattanCost()
     {
         int distanceCnt = 0;
         int val = 0;
         int xFinal = 0;
         int yFinal = 0;
-        int dx = 0;
-        int dy = 0;
         
         for (int i = 0; i < row; ++i)
         {
@@ -192,9 +191,7 @@ public:
                 {
                     xFinal = (val - 1) / row;
                     yFinal = (val - 1) % col;
-                    dx = i - xFinal;
-                    dy = j - yFinal;
-                    distanceCnt = distanceCnt + abs(dx) + abs(dy);
+                    distanceCnt = distanceCnt + abs(xFinal - i) + abs(yFinal - j);
                 }
             }
         }
