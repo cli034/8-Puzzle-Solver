@@ -4,6 +4,7 @@
 #include <queue>
 #include <cmath>
 
+//added comments to test git on microsoft visual code
 const int row = 3; //row size of puzzle
 const int col = 3; //column size of puzzle
 int defaultPuzzle[row][col] = {{1,0,2},{7,5,4},{8,6,3}}; // default puzzle
